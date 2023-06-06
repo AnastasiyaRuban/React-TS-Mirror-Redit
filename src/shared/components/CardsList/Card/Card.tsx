@@ -6,7 +6,7 @@ import { Preview } from './Preview';
 import { TextContent } from './TextContent';
 import { IPostData } from '../../../../types/interfaces';
 
-export function Card({ post }: { post: IPostData }) {
+export function Card({ post, token }: { post: IPostData; token: string }) {
   const { author, title, rating, avatar, previewImg, datePostUtc, id } = post;
 
   return (
@@ -17,6 +17,7 @@ export function Card({ post }: { post: IPostData }) {
         title={title}
         datePostUtc={datePostUtc}
         id={id}
+        token={token}
       />
       <Preview previewImg={previewImg} />
       <Menu id={id} />

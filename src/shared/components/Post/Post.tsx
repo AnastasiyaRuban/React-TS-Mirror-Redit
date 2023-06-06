@@ -1,24 +1,32 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 // import { CommentForm } from './CommentForm/CommentForm';
 import styles from './post.css';
 import useCommentsData from '../../../hooks/useCommentsData';
+import { tokenContext } from '../../context/tokenContext';
 
 interface IPropsPost {
-  onClose?: () => void;
-  commentsList?: any;
-  title: string;
-  id: string;
+  title: String;
+  onClose: () => void;
+  id: String;
+  token: String;
 }
 
-export function Post({ title, onClose, id }: IPropsPost) {
+export function Post({ title, onClose, id, token }: IPropsPost) {
   const node = document.querySelector('#modal_root');
   const modal = useRef<HTMLDivElement>(null);
-  const [data] = useCommentsData(id);
-  console.log(data);
+
+  const [postData, setPostData] = useState([]);
+
+  // const token = useContext(tokenContext);
+  const [data] = useCommentsData(id, token);
+
+  setPostData(data);
 
   if (!node) return null;
   node.innerHTML = '';
+
+  console.log(postData);
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -26,7 +34,7 @@ export function Post({ title, onClose, id }: IPropsPost) {
         event.target instanceof Node &&
         !modal.current?.contains(event.target)
       )
-        onClose?.();
+        onClose();
     }
 
     document.addEventListener('click', handleClick);

@@ -10,11 +10,12 @@ export function TextContent({
   avatar,
   datePostUtc,
   id,
+  token,
 }: ITextContentProps) {
   return (
     <div className={styles.textContent}>
       <MetaData author={author} avatar={avatar} datePostUtc={datePostUtc} />
-      <Title title={title} id={id} />
+      <Title title={title} id={id} token={token} />
     </div>
   );
 }

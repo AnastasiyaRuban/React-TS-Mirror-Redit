@@ -3,9 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { tokenContext } from '../shared/context/tokenContext';
 
 
-export default function useCommentsData(id: string) {
+export default function useCommentsData(id: String, token: String) {
     const [postData, setPostData] = useState([]);
-    const token = useContext(tokenContext)
 
     useEffect(() => {
         if (token && token.length > 0 && token !== 'undefined') {
@@ -19,6 +18,6 @@ export default function useCommentsData(id: string) {
                 })
                 .catch(() => console.log('error comments'));
         }
-    }, [])
+    }, [token, id])
     return [postData]
 }

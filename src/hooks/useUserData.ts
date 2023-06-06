@@ -1,13 +1,11 @@
-import { tokenContext } from '../shared/context/tokenContext';
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IUserData } from '../types/interfaces';
 import axios from 'axios';
 
-
-export function useUserData() {
+export function useUserData(token: String) {
     const [data, setData] = useState<IUserData>({});
 
-    const token = useContext(tokenContext)
+    console.log(token);
 
     useEffect(() => {
         if (token && token.length > 0 && token !== 'undefined') {
@@ -22,9 +20,9 @@ export function useUserData() {
                         iconImg: userData.icon_img.split('?')[0],
                     });
                 })
-                .catch(console.log);
+                .catch(() => console.log('Error in hook useUserData'));
         }
-    });
+    }, [token]);
 
     return [data]
 }

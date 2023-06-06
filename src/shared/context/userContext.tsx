@@ -6,9 +6,11 @@ export const userContext = createContext<IUserContextData>({});
 
 export function UserContextProvider({
   children,
+  token,
 }: {
   children: React.ReactNode;
+  token: String;
 }) {
-  const [data] = useUserData();
+  const [data] = useUserData(token);
   return <userContext.Provider value={data}>{children}</userContext.Provider>;
 }

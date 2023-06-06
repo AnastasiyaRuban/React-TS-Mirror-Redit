@@ -15,11 +15,11 @@ function AppComponent() {
 
   return (
     <tokenContext.Provider value={token}>
-      <UserContextProvider>
+      <UserContextProvider token={token}>
         <Layout>
           <Header />
           <Content>
-            <PostsContextProvider>
+            <PostsContextProvider token={token}>
               <CardsList />
             </PostsContextProvider>
           </Content>

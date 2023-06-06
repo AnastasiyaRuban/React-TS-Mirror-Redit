@@ -1,11 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IPostData } from '../types/interfaces';
-import { useToken } from './useToken';
 
-export function usePostsData() {
+export function usePostsData(token: String) {
   const [data, setData] = useState<Array<IPostData>>([]);
-  const [token] = useToken();
 
   useEffect(() => {
     if (token && token.length > 0 && token !== 'undefined') {
@@ -34,7 +32,7 @@ export function usePostsData() {
           );
           setData(postsData);
         })
-        .catch(() => console.log(42));
+        .catch(() => console.log('Error in hook usePostData'));
     }
   }, [token]);
 

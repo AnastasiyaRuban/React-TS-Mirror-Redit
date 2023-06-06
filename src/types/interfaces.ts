@@ -63,6 +63,7 @@ export interface ITextContentProps {
     datePostUtc: string;
     avatar: string;
     id: string;
+    token: string;
 }
 
 export interface IMetaDataProps {
