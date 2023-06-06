@@ -1,19 +1,22 @@
 import React from 'react';
 import { Button } from '../../../Button';
-// import { Button } from '@components/Button';
-// import commentsIcon from '@assets/icons/comments.svg';
-import commentsIcon from '../../../../assets/icons/comments.svg';
 import styles from './controls.css';
+import { Icon } from '../../../Icon';
+import { EIcon } from '../../../../../types/enums';
 import { KarmaCounter } from './KarmaCounter';
 import { Actions } from './Actions';
 
-export function Controls() {
+interface IControlsProps {
+  rating: string;
+}
+
+export function Controls({ rating }: IControlsProps) {
   return (
     <div className={styles.controls}>
-      <KarmaCounter />
+      <KarmaCounter rating={rating} />
 
       <Button className={styles.commentsButton}>
-        <img src={commentsIcon} alt='' />
+        <Icon name={EIcon.comments} className={styles.avatarImage} />
         <span className={styles.commentsNumber}>13</span>
       </Button>
 

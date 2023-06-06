@@ -1,59 +1,125 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../../../Button';
-import menuIcon from '@assets/icons/menu.svg';
-import hideIcon from '@assets/icons/hide.svg';
-import complainIcon from '@assets/icons/complain.svg';
 import styles from './menu.css';
 import { Dropdown } from '../../../Dropdown';
 import { GenericList } from '../../../GenericList';
-import { generateRandomString } from '../../../../utils/generateRandomIndex';
+import {
+  generateId,
+  generateRandomString,
+} from '../../../../utils/generateRandomIndex';
 import { IItem } from '../../../GenericList';
-import { ButtonWidthIcon } from '../../../ButtonWidthIcon';
+import { Icon } from '../../../Icon';
+import { EIcon } from '../../../../../types/enums';
 
-const menuMobile: IItem[] = [
+const menuList: IItem[] = [
   {
-    id: generateRandomString(),
-    text: (
-      <ButtonWidthIcon
+    element: (
+      <Button
         className={styles.menuItemButton}
-        icon={hideIcon}
-        children={'Скрыть'}
+        children={
+          <>
+            <Icon name={EIcon.comments} className={styles.avatarImage} />
+            Комментарии
+          </>
+        }
+      />
+    ),
+    className: `${styles.menuItem} ${styles.menuItemTablet}`,
+    As: 'li' as const,
+  },
+  {
+    element: (
+      <Button
+        className={styles.menuItemButton}
+        children={
+          <>
+            <Icon name={EIcon.share} className={styles.avatarImage} />
+            Поделиться
+          </>
+        }
+      />
+    ),
+    className: `${styles.menuItem} ${styles.menuItemTablet}`,
+    As: 'li' as const,
+  },
+  {
+    element: (
+      <Button
+        className={styles.menuItemButton}
+        children={
+          <>
+            <Icon name={EIcon.hide} className={styles.avatarImage} />
+            Скрыть
+          </>
+        }
       />
     ),
     className: styles.menuItem,
-    As: 'li',
+    As: 'li' as const,
   },
   {
-    id: generateRandomString(),
-    text: (
-      <ButtonWidthIcon
+    element: (
+      <Button
         className={styles.menuItemButton}
-        icon={complainIcon}
-        children={'Пожаловаться'}
+        children={
+          <>
+            <Icon name={EIcon.save} className={styles.avatarImage} />
+            Сохранить
+          </>
+        }
+      />
+    ),
+    className: `${styles.menuItem} ${styles.menuItemTablet}`,
+    As: 'li' as const,
+  },
+  {
+    element: (
+      <Button
+        className={styles.menuItemButton}
+        children={
+          <>
+            <Icon name={EIcon.complain} className={styles.avatarImage} />
+            Пожаловаться
+          </>
+        }
       />
     ),
     className: styles.menuItem,
-    As: 'li',
+    As: 'li' as const,
   },
-];
+].map(generateId);
 
-export function Menu() {
+interface IMenuProps {
+  id: string;
+}
+
+export function Menu({ id }: IMenuProps) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <div className={styles.menu}>
-      <Dropdown
-        button={
-          <Button
-            className={styles.menuButton}
-            children={<img src={menuIcon} alt='menu' />}
-          />
-        }
-        styles={styles}
-      >
-        <ul className={styles.menuList}>
-          <GenericList list={menuMobile} />
-        </ul>
-        <Button children={'Закрыть'} className={styles.listButton} />
-      </Dropdown>
+      <Button
+        onClick={handleOpen}
+        className={styles.menuButton}
+        children={<Icon name={EIcon.menu} className={styles.menuIcon} />}
+      />
+      <div className={styles['dropdown_root']} id={`dropdown_root_${id}`}></div>
+      {isDropdownOpen && (
+        <Dropdown
+          isOpen={isDropdownOpen}
+          onClose={() => setIsDropdownOpen(false)}
+          id={id}
+        >
+          <ul className={styles.menuList}>
+            <GenericList list={menuList} />
+          </ul>
+          <Button children={'Закрыть'} className={styles.listButton} />
+        </Dropdown>
+      )}
     </div>
   );
 }

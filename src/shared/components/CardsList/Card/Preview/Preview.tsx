@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './preview.css';
 
-export function Preview() {
+interface IPreviewProps {
+  previewImg: string;
+}
+
+export function Preview({ previewImg }: IPreviewProps) {
   return (
     <div className={styles.preview}>
-      <img
-        className={styles.previewImg}
-        src='https://img1.goodfon.ru/wallpaper/nbig/a/69/kartinka-3d-dikaya-koshka.jpg'
-        alt=''
-      />
+      <img className={styles.previewImg} src={previewImg} alt='preview image' />
     </div>
   );
 }

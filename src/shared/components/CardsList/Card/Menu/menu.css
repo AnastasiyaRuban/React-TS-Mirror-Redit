@@ -34,6 +34,14 @@
   width: 100%;
 }
 
+.menuItemTablet {
+  display: none;
+}
+
+.menuIcon {
+  color: red;
+}
+
 @media all and (min-width: 1024px) {
   .menu {
     position: relative;
@@ -50,11 +58,17 @@
     align-self: center;
     transform: unset;
   }
-}
+  .menuItemTablet {
+    display: block;
+  }
 
-@media all and (min-width: 1540px) {
-  .menuButton:hover {
-    background-color: rgba(51, 51, 51, 0.1);
+  @media all and (min-width: 1540px) {
+    .menuButton:hover {
+      background-color: rgba(51, 51, 51, 0.1);
+    }
+    .listButton {
+      display: none;
+    }
   }
 }
 
@@ -100,6 +114,7 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   border-radius: 3px;
   overflow: auto;
+  z-index: 2;
 }
 
 .menuList {
@@ -120,4 +135,12 @@
   text-align: center;
   color: #666666;
   background: #d9d9d9;
+}
+
+.menuItemButton svg {
+  margin-right: 5px;
+}
+
+.dropdown_root {
+  position: relative;
 }

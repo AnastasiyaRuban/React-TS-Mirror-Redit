@@ -2,12 +2,19 @@ import React from 'react';
 import { MetaData } from './MetaData';
 import { Title } from './Title';
 import styles from './textcontent.css';
+import { ITextContentProps } from '../../../../../types/interfaces';
 
-export function TextContent() {
+export function TextContent({
+  author,
+  title,
+  avatar,
+  datePostUtc,
+  id,
+}: ITextContentProps) {
   return (
     <div className={styles.textContent}>
-      <MetaData />
-      <Title />
+      <MetaData author={author} avatar={avatar} datePostUtc={datePostUtc} />
+      <Title title={title} id={id} />
     </div>
   );
 }

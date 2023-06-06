@@ -7,19 +7,22 @@ button {
 
 .card {
   position: relative;
+  margin-bottom: 20px;
   background-color: var(--white);
   border-radius: 7px;
   padding: 20px 20px 10px;
   display: flex;
   flex-flow: row wrap;
 }
-.card > *, .textContent > * {
+.card > *,
+.textContent > * {
   flex: 1 1 100%;
 }
 .card > * + * {
   padding: 13px 0 0;
 }
-.card:hover h2 a, .card:focus-within h2 a {
+.card:hover h2 a,
+.card:focus-within h2 a {
   color: var(--orange);
 }
 
@@ -44,7 +47,8 @@ button {
     max-height: 147px;
     cursor: pointer;
   }
-  .card:hover, .card:focus-within {
+  .card:hover,
+  .card:focus-within {
     outline: 1px solid var(--grey-demi-dark);
   }
 }

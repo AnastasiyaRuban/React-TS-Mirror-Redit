@@ -1,19 +1,17 @@
 import React from 'react';
 import { Button } from '../../../../Button';
-// import shareIcon from '@assets/icons/share.svg';
-// import saveIecon from '@assets/icons/save.svg';
-import shareIcon from '../../../../../assets/icons/arrow-down.svg';
-import saveIcon from '../../../../../assets/icons/arrow-down.svg';
+import { Icon } from '../../../../Icon';
+import { EIcon } from '../../../../../../types/enums';
 import styles from './actions.css';
 
 export function Actions() {
   return (
     <div className={styles.actions}>
       <Button className={styles.shareButton}>
-        <img src={shareIcon} alt='' />
+        <Icon name={EIcon.share} className={styles.avatarImage} />
       </Button>
       <Button className={styles.saveButton}>
-        <img src={saveIcon} alt='' />
+        <Icon name={EIcon.save} className={styles.avatarImage} />
       </Button>
     </div>
   );

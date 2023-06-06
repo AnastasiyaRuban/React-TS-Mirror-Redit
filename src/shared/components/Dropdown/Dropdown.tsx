@@ -1,53 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import styles from './dropdown.css';
+import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import * as stylesdefault from './dropdown.css';
 
 interface IDropdownProps {
-  button: React.ReactNode;
   children: React.ReactNode;
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
-  styles: {
+  styles?: {
     [key: string]: string;
   };
+  id: string;
 }
 
 const noop = () => {};
 
 export function Dropdown({
-  button,
   children,
-  isOpen,
-  styles,
-  onOpen = noop,
+  styles = stylesdefault,
   onClose = noop,
+  id,
 }: IDropdownProps) {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(isOpen);
+  const node = document.querySelector(`#dropdown_root_${id}`);
 
-  useEffect(() => {
-    setIsDropdownOpen(isOpen);
-  }, [isOpen]);
+  if (!node) return null;
+  node.innerHTML = '';
 
-  useEffect(() => {
-    isDropdownOpen ? onOpen() : onClose();
-  }, [isDropdownOpen]);
-
-  const handleOpen = () => {
-    if (isOpen === undefined) {
-      setIsDropdownOpen(!isDropdownOpen);
-    }
-  };
-
-  return (
-    <div className={styles.container}>
-      <div onClick={handleOpen}>{button}</div>
-      {isDropdownOpen && (
-        <div className={styles.listContainer}>
-          <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
-            {children}
-          </div>
-        </div>
-      )}
-    </div>
+  return ReactDOM.createPortal(
+    <div className={styles.list} onClick={onClose}>
+      {children}
+    </div>,
+    node
   );
 }

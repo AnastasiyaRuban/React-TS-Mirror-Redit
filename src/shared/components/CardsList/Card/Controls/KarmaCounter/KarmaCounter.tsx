@@ -1,20 +1,22 @@
 import React from 'react';
 import { Button } from '../../../../Button';
-// import arrowUpIcon from '@assets/icon/arrow-up.svg';
-// import arrowDownIcon from '@assets/icon/arrow-down.svg';
-import arrowUpIcon from '../../../../../assets/icons/arrow-up.svg';
-import arrowDownIcon from '../../../../../assets/icons/arrow-down.svg';
 import styles from './karmacounter.css';
+import { Icon } from '../../../../Icon';
+import { EIcon } from '../../../../../../types/enums';
 
-export function KarmaCounter() {
+interface IKarmaCounterProps {
+  rating: string;
+}
+
+export function KarmaCounter({ rating }: IKarmaCounterProps) {
   return (
     <div className={styles.karmaCounter}>
       <Button className={styles.up}>
-        <img src={arrowUpIcon} alt='arrowUp' />
+        <Icon name={EIcon.arrowUp} className={styles.avatarImage} />
       </Button>
-      <span className={styles.karmaValue}>234</span>
+      <span className={styles.karmaValue}>{rating}</span>
       <Button className={styles.down}>
-        <img src={arrowDownIcon} alt='arrowDown' />
+        <Icon name={EIcon.arrowDown} className={styles.avatarImage} />
       </Button>
     </div>
   );
